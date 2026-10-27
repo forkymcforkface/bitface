@@ -1,4 +1,4 @@
-import type { PartCategory } from '../../types.ts';
+import type { PartCategory } from '../../../types.ts';
 
 // Accessories layer on top of everything.
 // Slot map: 1 = accessoryPrimary, 2 = accessorySecondary, 3 = lens (semi-transparent)

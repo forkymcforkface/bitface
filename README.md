@@ -24,7 +24,7 @@ Generate unique 16x16 pixel art faces as clean SVGs — no dependencies, no canv
 - **Framework agnostic** — first-class React, Vue, and Svelte support, but works without any of them
 - **Animations** — idle, blink, talk, and emote presets built in
 - **9 customizable features** — face shape, eyes, eyebrows, mouth, nose, ears, hair, beard, and accessories
-- **Color presets** — 6 skin tones, 13 hair colors, 4 eye colors, or use any hex color
+- **Color presets** — 12 skin colors, 13 hair colors, 4 eye colors, or use any hex color
 
 ## Install
 
@@ -48,6 +48,22 @@ const coolAvatar = generateFace(config)
 ```
 
 That's it. `coolAvatar` is an SVG string you can drop into any `innerHTML`, save to a file, or send over an API.
+
+## Emoji and food
+
+Faces, Emoji and Food have separate folders under `src/renderer/parts/`. Emoji use the same numeric pixel patterns and color-slot mapping as faces, and share the skin color presets in `src/renderer/palette.ts`. Original RGBA colors are preserved without a palette-size limit, and no image files are needed at runtime.
+
+```js
+import { generateEmoji, EMOJI_PRESETS, generateFood, getAvailableFoods } from '@ignaciocabeza/bitface'
+
+const emoji = generateEmoji({ ...EMOJI_PRESETS[0], color: 'green' })
+const food = generateFood('apple_red')
+const foods = getAvailableFoods()
+```
+
+All 128 source emoji are included: 116 face presets use reusable parts, and 12 badges/hearts are standalone symbols available through `generateEmojiSymbolGrid`. Emoji can change Color, Eyes, Eyebrows, Nose, Mouth and Accessories. Some source features are hidden by glasses, masks or other accessories; the supplied patterns preserve visible artwork rather than inventing hidden details.
+
+Artwork comes from [KabGames' 128+ Emoji Pixel Art](https://kaboff.itch.io/128-emoji-pixel-art) and [ARoachIFoundOnMyPillow's 16x16 Food](https://opengameart.org/content/16x16-food), both listed under CC0. Original artwork is converted to editable TypeScript `PartPattern` data; tests compare every source image's visible RGBA pixels, with the requested unified White shading and curated accessory selection.
 
 ## Framework usage
 

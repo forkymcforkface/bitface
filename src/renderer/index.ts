@@ -1,7 +1,7 @@
 import type { FaceConfig } from '../types.ts';
 import { generateGrid, generatePartThumbnail } from './generator.ts';
 import { gridToSvg } from './svg.ts';
-import { getVariantNames, getAllCategories } from './parts/index.ts';
+import { getVariantNames, getAllCategories } from './parts/faces/index.ts';
 import { SKIN_PRESETS, HAIR_PRESETS, EYE_PRESETS } from './palette.ts';
 
 function pickRandom<T>(arr: T[]): T {

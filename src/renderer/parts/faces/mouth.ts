@@ -1,4 +1,4 @@
-import type { PartCategory } from '../../types.ts';
+import type { PartCategory } from '../../../types.ts';
 
 // Mouth is placed below the nose.
 // Slot map: 1 = mouthColor (dark pink/red), 2 = teeth (white)

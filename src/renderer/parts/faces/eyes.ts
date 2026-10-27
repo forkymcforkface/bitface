@@ -1,4 +1,4 @@
-import type { PartCategory } from '../../types.ts';
+import type { PartCategory } from '../../../types.ts';
 
 // Eyes are placed relative to face center.
 // Slot map: 1 = white (sclera), 2 = eyeColor (iris), 3 = pupil (black)

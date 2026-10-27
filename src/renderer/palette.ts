@@ -5,6 +5,12 @@ export const SKIN_PRESETS: Record<string, string> = {
   brown: '#A0673C',
   dark: '#6B4226',
   pale: '#FFF0E0',
+  yellow: '#F7CC50',
+  cyan: '#5FCDE4',
+  white: '#FFFFFF',
+  purple: '#AA5BC8',
+  green: '#6ABE30',
+  red: '#F20F24',
 };
 
 export const SKIN_SHADOW_MAP: Record<string, string> = {
@@ -14,6 +20,21 @@ export const SKIN_SHADOW_MAP: Record<string, string> = {
   '#A0673C': '#885524',
   '#6B4226': '#533010',
   '#FFF0E0': '#E7D8C8',
+  '#F7CC50': '#D79F36',
+  '#5FCDE4': '#45B2C8',
+  '#FFFFFF': '#EDEDED',
+  '#AA5BC8': '#7F4296',
+  '#6ABE30': '#5BA825',
+  '#F20F24': '#D70D20',
+};
+
+export const SKIN_HIGHLIGHT_MAP: Record<string, string> = {
+  '#F7CC50': '#FFDF83',
+  '#5FCDE4': '#45B2C8',
+  '#FFFFFF': '#EDEDED',
+  '#AA5BC8': '#BA63DB',
+  '#6ABE30': '#89E44B',
+  '#F20F24': '#FF4C5C',
 };
 
 export const HAIR_PRESETS: Record<string, string> = {
@@ -39,6 +60,15 @@ export const EYE_PRESETS: Record<string, string> = {
   gray: '#7A7A7A',
 };
 
+export const BG_PRESETS: Record<string, string> = {
+  sky: '#87CEEB',
+  white: '#FFFFFF',
+  gray: '#888888',
+  dark: '#1A1A2E',
+  green: '#4CAF50',
+  transparent: 'transparent',
+};
+
 const HEX_COLOR_RE = /^#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 
 /** Validate that a string is a safe hex color. Returns the color or the fallback. */
@@ -49,11 +79,16 @@ export function sanitizeColor(value: string, fallback: string): string {
 
 export function resolveSkinColor(value: string | undefined): string {
   if (!value) return SKIN_PRESETS.medium;
-  return SKIN_PRESETS[value] ?? sanitizeColor(value, SKIN_PRESETS.medium);
+  if (Object.prototype.hasOwnProperty.call(SKIN_PRESETS, value)) return SKIN_PRESETS[value];
+  return sanitizeColor(value, SKIN_PRESETS.medium);
 }
 
 export function resolveSkinShadow(skinHex: string): string {
   return SKIN_SHADOW_MAP[skinHex] ?? darken(skinHex, 30);
+}
+
+export function resolveSkinHighlight(skinHex: string): string {
+  return SKIN_HIGHLIGHT_MAP[skinHex] ?? skinHex;
 }
 
 export function resolveHairColor(value: string | undefined): string {

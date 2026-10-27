@@ -1,4 +1,4 @@
-import type { PartCategory } from '../../types.ts';
+import type { PartCategory } from '../../../types.ts';
 
 // Ears sit on the sides of the face.
 // Slot map: 1 = skin, 2 = skinShadow

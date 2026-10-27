@@ -1,4 +1,4 @@
-import type { PartCategory } from '../../types.ts';
+import type { PartCategory } from '../../../types.ts';
 
 // Face shapes are placed on a 16×16 canvas.
 // Slot map: 1 = skin, 2 = skinShadow

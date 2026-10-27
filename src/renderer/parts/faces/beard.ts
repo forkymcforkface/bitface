@@ -1,4 +1,4 @@
-import type { PartCategory } from '../../types.ts';
+import type { PartCategory } from '../../../types.ts';
 
 // Beard/facial hair is drawn on the lower face area.
 // Slot map: 1 = hair

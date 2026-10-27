@@ -1,5 +1,5 @@
 import type { FaceConfig, PixelGrid, PartPattern } from '../types.ts';
-import { getPart } from './parts/index.ts';
+import { getPart } from './parts/faces/index.ts';
 import {
   resolveSkinColor,
   resolveSkinShadow,
@@ -40,7 +40,7 @@ function darkenColor(hex: string, amount: number): string {
 }
 
 /** Stamp a part pattern onto the 16×16 pixel grid using the color map. */
-function stampPart(
+export function stampPart(
   grid: PixelGrid,
   part: PartPattern,
   colorMap: Record<string, string>

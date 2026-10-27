@@ -1,4 +1,4 @@
-import type { PartCategory, PartPattern } from '../../types.ts';
+import type { PartCategory, PartPattern } from '../../../types.ts';
 import faceShapes from './face-shapes.ts';
 import eyes from './eyes.ts';
 import eyebrows from './eyebrows.ts';

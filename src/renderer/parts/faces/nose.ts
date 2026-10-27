@@ -1,4 +1,4 @@
-import type { PartCategory } from '../../types.ts';
+import type { PartCategory } from '../../../types.ts';
 
 // Nose sits between eyes and mouth.
 // Slot map: 1 = skinShadow (nose is a subtle shadow on skin)

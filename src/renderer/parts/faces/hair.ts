@@ -1,4 +1,4 @@
-import type { PartCategory } from '../../types.ts';
+import type { PartCategory } from '../../../types.ts';
 
 // Hair is drawn on top of the face at the head area.
 // Slot map: 1 = hair, 2 = hairShadow

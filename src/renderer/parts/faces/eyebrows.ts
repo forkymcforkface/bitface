@@ -1,4 +1,4 @@
-import type { PartCategory } from '../../types.ts';
+import type { PartCategory } from '../../../types.ts';
 
 // Eyebrows sit above the eyes.
 // Slot map: 1 = hairColor (eyebrows match hair)

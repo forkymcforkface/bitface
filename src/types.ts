@@ -14,6 +14,16 @@ export interface FaceConfig {
   backgroundColor?: string;
 }
 
+export interface EmojiConfig {
+  color: string;
+  eyes: string;
+  eyebrows: string;
+  nose: string;
+  mouth: string;
+  accessories: string;
+  backgroundColor?: string;
+}
+
 /** 16×16 grid. Each cell is a hex color string or null (transparent). */
 export type PixelGrid = (string | null)[][];
 
