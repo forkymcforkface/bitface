@@ -11,6 +11,8 @@ export function PartSelector({
   onChange,
   onRandomize,
   isRandomized,
+  getThumbnail = (variant) => getPartThumbnail(category, variant, skinColor, hairColor, eyeColor),
+  getLabel = (variant) => variant,
 }: {
   category: string;
   label: string;
@@ -22,6 +24,8 @@ export function PartSelector({
   onChange: (variant: string) => void;
   onRandomize: () => void;
   isRandomized?: boolean;
+  getThumbnail?: (variant: string) => string;
+  getLabel?: (variant: string) => string;
 }) {
   return (
     <div>
@@ -36,10 +40,10 @@ export function PartSelector({
                 ? ' border-accent bg-selected-bg'
                 : ' border-border hover:border-hover-border')
             }
-            title={variant}
+            title={getLabel(variant)}
             onClick={() => onChange(variant)}
             dangerouslySetInnerHTML={{
-              __html: getPartThumbnail(category, variant, skinColor, hairColor, eyeColor),
+              __html: getThumbnail(variant),
             }}
           />
         ))}

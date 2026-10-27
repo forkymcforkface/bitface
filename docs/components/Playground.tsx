@@ -2,10 +2,12 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 import type { FaceConfig } from '../../src/types.ts';
 import { getAvailableParts } from '../../src/renderer/index.ts';
 import { getAnimationNames } from '../../src/renderer/animations.ts';
-import { SKIN_PRESETS, HAIR_PRESETS, EYE_PRESETS } from '../../src/renderer/palette.ts';
+import { SKIN_PRESETS, HAIR_PRESETS, EYE_PRESETS, BG_PRESETS } from '../../src/renderer/palette.ts';
 import { Preview } from './Preview.tsx';
 import { PartSelector } from './PartSelector.tsx';
 import { ColorPicker } from './ColorPicker.tsx';
+import { EmojiPlayground } from './EmojiPlayground.tsx';
+import { FoodPlayground } from './FoodPlayground.tsx';
 
 const ANIMATION_OPTIONS = ['none', ...getAnimationNames(), 'suffering'];
 
@@ -22,15 +24,6 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 const PART_CATEGORIES = ['faceShape', 'eyes', 'eyebrows', 'mouth', 'nose', 'ears', 'hair', 'beard', 'accessories'] as const;
-
-const BG_PRESETS: Record<string, string> = {
-  sky: '#87CEEB',
-  white: '#FFFFFF',
-  gray: '#888888',
-  dark: '#1A1A2E',
-  green: '#4CAF50',
-  transparent: 'transparent',
-};
 
 function defaultConfig(): FaceConfig {
   return {
@@ -73,7 +66,7 @@ function randomConfig(): FaceConfig {
   };
 }
 
-export function Playground() {
+function FacePlayground() {
   const [config, setConfig] = useState<FaceConfig>(defaultConfig);
   const [bgPreset, setBgPreset] = useState('sky');
   const [animation, setAnimation] = useState('none');
@@ -262,6 +255,32 @@ export function Playground() {
           />
         </div>
       </div>
+    </div>
+  );
+}
+
+export function Playground() {
+  const [section, setSection] = useState('faces');
+
+  return (
+    <div>
+      <div className="flex justify-center gap-3 mb-6" role="tablist" aria-label="Avatar type">
+        {['faces', 'emoji', 'food'].map((name) => (
+          <button
+            key={name}
+            role="tab"
+            aria-selected={section === name}
+            className={'px-5 py-2.5 rounded-lg border-2 cursor-pointer transition-colors duration-150 ' +
+              (section === name ? 'border-accent bg-selected-bg text-white' : 'border-border bg-card text-muted-light hover:border-hover-border')}
+            onClick={() => setSection(name)}
+          >
+            {name.charAt(0).toUpperCase() + name.slice(1)}
+          </button>
+        ))}
+      </div>
+      {section === 'faces' && <FacePlayground />}
+      {section === 'emoji' && <EmojiPlayground />}
+      {section === 'food' && <FoodPlayground />}
     </div>
   );
 }

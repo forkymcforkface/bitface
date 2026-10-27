@@ -4,8 +4,12 @@ import type { AnimationSequence } from '../../src/renderer/animations.ts';
 import { useAnimatedAvatar } from '../../src/react.tsx';
 
 export function Preview({ config, animation, intensity }: { config: FaceConfig; animation?: string | AnimationSequence; intensity?: number }) {
-  const [copied, setCopied] = useState<'svg' | 'json' | null>(null);
   const svg = useAnimatedAvatar(config, animation || undefined, intensity);
+  return <SvgPreview svg={svg} config={config} />;
+}
+
+export function SvgPreview({ svg, config }: { svg: string; config: unknown }) {
+  const [copied, setCopied] = useState<'svg' | 'json' | null>(null);
 
   function handleCopySvg() {
     navigator.clipboard.writeText(svg);
