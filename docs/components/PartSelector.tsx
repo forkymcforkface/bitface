@@ -13,6 +13,7 @@ export function PartSelector({
   isRandomized,
   getThumbnail = (variant) => getPartThumbnail(category, variant, skinColor, hairColor, eyeColor),
   getLabel = (variant) => variant,
+  showLabels = false,
 }: {
   category: string;
   label: string;
@@ -26,6 +27,7 @@ export function PartSelector({
   isRandomized?: boolean;
   getThumbnail?: (variant: string) => string;
   getLabel?: (variant: string) => string;
+  showLabels?: boolean;
 }) {
   return (
     <div>
@@ -35,17 +37,22 @@ export function PartSelector({
           <button
             key={variant}
             className={
-              'thumbnail-btn w-12 h-12 bg-card border-2 rounded-lg cursor-pointer p-1 transition-colors duration-150' +
+              'thumbnail-btn bg-card border-2 rounded-lg cursor-pointer p-1 transition-colors duration-150' +
+              (showLabels ? ' w-20 min-h-22 text-muted-light' : ' w-12 h-12') +
               (!isRandomized && variant === selected
                 ? ' border-accent bg-selected-bg'
                 : ' border-border hover:border-hover-border')
             }
             title={getLabel(variant)}
+            aria-label={getLabel(variant)}
             onClick={() => onChange(variant)}
-            dangerouslySetInnerHTML={{
-              __html: getThumbnail(variant),
-            }}
-          />
+          >
+            <span
+              className={showLabels ? 'block w-12 h-12 mx-auto' : 'block w-full h-full'}
+              dangerouslySetInnerHTML={{ __html: getThumbnail(variant) }}
+            />
+            {showLabels && <span className="block text-[11px] leading-tight mt-1">{getLabel(variant)}</span>}
+          </button>
         ))}
         <button
           className={

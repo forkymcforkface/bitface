@@ -5,6 +5,8 @@ export function ColorPicker({
   onChange,
   onRandomize,
   isRandomized,
+  getLabel = name => name,
+  showLabels = false,
 }: {
   label: string;
   presets: Record<string, string>;
@@ -12,6 +14,8 @@ export function ColorPicker({
   onChange: (name: string) => void;
   onRandomize?: () => void;
   isRandomized?: boolean;
+  getLabel?: (name: string) => string;
+  showLabels?: boolean;
 }) {
   return (
     <div>
@@ -19,20 +23,31 @@ export function ColorPicker({
       <div className="flex flex-wrap gap-2">
         {Object.entries(presets).map(([name, hex]) => {
           const isTransparent = hex === 'transparent';
+          const colorLabel = getLabel(name);
           return (
             <button
               key={name}
               className={
-                'w-8 h-8 rounded-full border-2 cursor-pointer transition-all duration-150' +
+                'border-2 cursor-pointer transition-all duration-150' +
+                (showLabels ? ' flex items-center gap-2 min-h-9 px-2 py-1.5 rounded-lg text-xs text-muted-light' : ' w-8 h-8 rounded-full') +
                 (!isRandomized && name === selected
-                  ? ' border-accent scale-115 shadow-[0_0_8px_rgba(123,104,238,0.4)]'
-                  : ' border-border hover:border-hover-border hover:scale-110') +
-                (isTransparent ? ' swatch-transparent' : '')
+                  ? ' border-accent shadow-[0_0_8px_rgba(123,104,238,0.4)]' + (showLabels ? '' : ' scale-115')
+                  : ' border-border hover:border-hover-border' + (showLabels ? '' : ' hover:scale-110')) +
+                (isTransparent && !showLabels ? ' swatch-transparent' : '')
               }
-              title={name}
-              style={isTransparent ? undefined : { backgroundColor: hex }}
+              title={showLabels && colorLabel !== hex ? `${colorLabel} (${hex})` : colorLabel}
+              aria-label={showLabels && colorLabel !== hex ? `${colorLabel} (${hex})` : colorLabel}
+              style={isTransparent || showLabels ? undefined : { backgroundColor: hex }}
               onClick={() => onChange(name)}
-            />
+            >
+              {showLabels && <>
+                <span
+                  className={'block w-6 h-6 rounded-full border border-border shrink-0' + (isTransparent ? ' swatch-transparent' : '')}
+                  style={isTransparent ? undefined : { backgroundColor: hex }}
+                />
+                <span>{colorLabel}</span>
+              </>}
+            </button>
           );
         })}
         {onRandomize && (

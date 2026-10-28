@@ -8,6 +8,7 @@ import { PartSelector } from './PartSelector.tsx';
 import { ColorPicker } from './ColorPicker.tsx';
 import { EmojiPlayground } from './EmojiPlayground.tsx';
 import { FoodPlayground } from './FoodPlayground.tsx';
+import { AvatarPlayground } from './AvatarPlayground.tsx';
 
 const ANIMATION_OPTIONS = ['none', ...getAnimationNames(), 'suffering'];
 
@@ -45,25 +46,6 @@ function defaultConfig(): FaceConfig {
 
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function randomConfig(): FaceConfig {
-  const parts = getAvailableParts();
-  return {
-    faceShape: randomChoice(parts.faceShape),
-    eyes: randomChoice(parts.eyes),
-    eyebrows: randomChoice(parts.eyebrows),
-    mouth: randomChoice(parts.mouth),
-    nose: randomChoice(parts.nose),
-    ears: randomChoice(parts.ears),
-    hair: randomChoice(parts.hair),
-    beard: randomChoice(parts.beard),
-    accessories: randomChoice(parts.accessories),
-    skinColor: randomChoice(Object.keys(SKIN_PRESETS)),
-    hairColor: randomChoice(Object.keys(HAIR_PRESETS)),
-    eyeColor: randomChoice(Object.keys(EYE_PRESETS)),
-    backgroundColor: '#87CEEB',
-  };
 }
 
 function FacePlayground() {
@@ -264,8 +246,8 @@ export function Playground() {
 
   return (
     <div>
-      <div className="flex justify-center gap-3 mb-6" role="tablist" aria-label="Avatar type">
-        {['faces', 'emoji', 'food'].map((name) => (
+      <div className="flex flex-wrap justify-center gap-3 mb-6" role="tablist" aria-label="Avatar type">
+        {['faces', 'emoji', 'food', 'avatar'].map((name) => (
           <button
             key={name}
             role="tab"
@@ -281,6 +263,7 @@ export function Playground() {
       {section === 'faces' && <FacePlayground />}
       {section === 'emoji' && <EmojiPlayground />}
       {section === 'food' && <FoodPlayground />}
+      {section === 'avatar' && <AvatarPlayground />}
     </div>
   );
 }
