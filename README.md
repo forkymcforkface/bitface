@@ -65,6 +65,20 @@ All 128 source emoji are included: 116 face presets use reusable parts, and 12 b
 
 Artwork comes from [KabGames' 128+ Emoji Pixel Art](https://kaboff.itch.io/128-emoji-pixel-art) and [ARoachIFoundOnMyPillow's 16x16 Food](https://opengameart.org/content/16x16-food), both listed under CC0. Original artwork is converted to editable TypeScript `PartPattern` data; tests compare every source image's visible RGBA pixels, with the requested unified White shading and curated accessory selection.
 
+## DiceBear Pixel Art avatars
+
+All 139 [DiceBear Pixel Art](https://www.dicebear.com/styles/pixel-art/) variants are available under `src/renderer/parts/avatar/`: accessories (4), beards (8), clothes (23), eyes (12), glasses (14), hair (45), hats (10), plus mouths (23). The fixed skin/body shape and all eight color palettes are included. Artwork is CC0 1.0 and uses no runtime dependencies.
+
+```ts
+import { generateAvatar, generateRandomAvatarConfig, getAvailableAvatarParts } from '@ignaciocabeza/bitface';
+
+const svg = generateAvatar({ seed: 'Felix', hair: 'short03', glasses: 'light02' });
+const random = generateRandomAvatarConfig();
+const parts = getAvailableAvatarParts();
+```
+
+Try the **Avatar** playground tab, including Idle, Talk, Blink, Sleepy, and Emote animations with an intensity slider. Sleepy adds closed eyes and reuses Emoji's sleep symbol. See the [complete feature inventory and API](docs/avatar.md). Seeded choices use Bitface's own generator; DiceBear core transforms and gradients are outside this integration.
+
 ## Framework usage
 
 ### React

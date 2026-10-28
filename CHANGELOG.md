@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- DiceBear Pixel Art avatars with all 139 source variants, eight color palettes, deterministic generation, and editable TypeScript part data.
+- An Avatar playground with numbered part labels, generic color names, and Idle, Talk, Blink, Sleepy, and Emote animations with intensity controls. Sleepy adds closed eyes and reuses the Emoji sleep symbol.
+
 ## [1.1.1] - 2026-04-04
 
 ### Fixed
