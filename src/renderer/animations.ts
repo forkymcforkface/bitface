@@ -1,14 +1,14 @@
 import type { FaceConfig } from '../types.ts';
 import { resolveSkinColor } from './palette.ts';
 
-export interface AnimationFrame {
+export interface AnimationFrame<TConfig = FaceConfig> {
   duration: number; // milliseconds
-  overrides: Partial<FaceConfig>;
+  overrides: Partial<TConfig>;
 }
 
-export interface AnimationSequence {
+export interface AnimationSequence<TConfig = FaceConfig> {
   name: string;
-  frames: AnimationFrame[];
+  frames: AnimationFrame<TConfig>[];
 }
 
 export const ANIMATIONS: Record<string, AnimationSequence> = {
@@ -69,8 +69,8 @@ export function getAnimationNames(): string[] {
 }
 
 /** Scale animation frame durations by intensity (0–100). 50 = normal speed, 100 = 5× faster, 0 = 5× slower. */
-export function applyIntensity(sequence: AnimationSequence, intensity: number): AnimationSequence {
-  const clamped = Math.max(0, Math.min(100, intensity));
+export function applyIntensity<TConfig>(sequence: AnimationSequence<TConfig>, intensity: number): AnimationSequence<TConfig> {
+  const clamped = Number.isFinite(intensity) ? Math.max(0, Math.min(100, intensity)) : 50;
   if (clamped === 50) return sequence;
   // Exponential scale: 0 → 5× slower, 50 → 1×, 100 → 5× faster
   const factor = Math.pow(0.2, (clamped - 50) / 50);

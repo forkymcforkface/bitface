@@ -14,3 +14,23 @@ export {
 export { EMOJI_PRESETS, EMOJI_PRESET_NAMES } from './renderer/parts/emoji/index.ts';
 export type { EmojiConfig } from './types.ts';
 export { generateFood, generateFoodGrid, getAvailableFoods } from './renderer/food/index.ts';
+
+export {
+  generateAvatar,
+  generateAvatarGrid,
+  generateRandomAvatarConfig,
+  getAvailableAvatarParts,
+  getAvatarPartThumbnail,
+  getAvatarPartLabel,
+  getAvatarColorLabel,
+  AVATAR_COLOR_NAMES,
+  AVATAR_ANIMATIONS,
+  getAvatarAnimationNames,
+  getAvatarAnimation,
+  AVATAR_COLOR_PRESETS,
+  AVATAR_FEATURES,
+} from './renderer/avatar/index.ts';
+export type {
+  AvatarConfig, AvatarSelections, ResolvedAvatarConfig, AvatarCategory, AvatarColorKey,
+  AvatarAnimationName, AvatarAnimationFrame, AvatarAnimationSequence,
+} from './renderer/avatar/index.ts';
